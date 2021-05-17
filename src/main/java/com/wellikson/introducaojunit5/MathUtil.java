@@ -1,5 +1,7 @@
 package com.wellikson.introducaojunit5;
 
+import java.util.Objects;
+
 /**
  *
  * @author wellikson
@@ -23,11 +25,25 @@ public class MathUtil {
         if (b == 0) {
             return Math.abs(a);
         }
-        //Propriedade 5
-        if (a % b != 0) {
-            return 1;
+//        //Propriedade 5 e 7
+//        if (a % b != 0) {
+//            return 1;
+//        }
+
+        return mdc(a - b, b);
+    }
+
+    public static int mdc(int... valores) {
+        Objects.requireNonNull(valores,"O parâmetro valores não pode ser nulo para calcular o MDC");
+        if (valores.length == 0) {
+            throw new IllegalArgumentException("E preciso indicar ao menos um valor para calcular o MDC. ");
         }
 
-        return -1;
+        int a = valores[0];
+        for (int b : valores) {
+            a = mdc(a, b);
+        }
+
+        return a;
     }
 }
